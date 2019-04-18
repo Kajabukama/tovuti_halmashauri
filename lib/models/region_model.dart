@@ -1,5 +1,5 @@
 class Region {
-  String id ="";
+  String id;
   String region;
   String capital;
   String districts;

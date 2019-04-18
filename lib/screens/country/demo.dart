@@ -8,7 +8,7 @@ class DemoScreen extends StatelessWidget {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              expandedHeight: 249.0,
+              expandedHeight: 280.0,
               floating: false,
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(

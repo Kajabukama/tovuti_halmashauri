@@ -18,6 +18,7 @@ void main() => runApp(new MaterialApp(
   routes: <String, WidgetBuilder>{
     '/splashScreen': (BuildContext context) => new SplashScreen(),
     '/homeScreen': (BuildContext context) => new HomeScreen(),
+    '/regionScreen': (BuildContext context) => new RegionScreen(),
     '/dashboardScreen': (BuildContext context) => new DashboardScreen(),
     '/sliderScreen': (BuildContext context) => new PageSlider(),
     '/countryScreen': (BuildContext context) => new CountryScreen()
