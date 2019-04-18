@@ -3,13 +3,18 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:tovuti_halmashauri/models/region_model.dart';
+import 'package:tovuti_halmashauri/screens/about/about.dart';
+import 'package:tovuti_halmashauri/screens/region/region_detail.dart';
 
-class CountryScreen extends StatefulWidget {
+class RegionScreen extends StatefulWidget {
   @override
-  CountryScreenState createState() => new CountryScreenState();
+  RegionScreenState createState() => new RegionScreenState();
 }
 
-class CountryScreenState extends State<CountryScreen> {
+class RegionScreenState extends State<RegionScreen> {
+
+  List<Region> _regions = List<Region>();
+  bool isloading = false;
 
   Future<List<Region>> fetchRegions() async {
     var url = "http://tovuti.youtanzaniaadventure.co.tz/api/regions/";
@@ -25,55 +30,78 @@ class CountryScreenState extends State<CountryScreen> {
   }
 
   @override
+  void initState() {
+    fetchRegions().then((value) {
+      setState(() {
+        _regions.addAll(value);
+      });
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: Icon(Icons.add_a_photo),
-        title: Text("OR-TAMISEMI"),
+        // leading: Icon(Icons.menu),
+        title: Text("Mikoa na Halmashauri"),
         centerTitle: true,
-        actions: <Widget>[],
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.share),
+            onPressed: (){},
+          ),
+          IconButton(
+            icon: Icon(Icons.more_vert),
+            onPressed: (){
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => new AboutScreen())
+              );
+            },
+          )
+        ],
       ),
-      body: Container(
-        child: FutureBuilder(
-          future: fetchRegions(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.data == null) {
-              return Container(
-                child: Center(
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2.0,
-                    backgroundColor: Colors.green,
-                  )
-                ),
-              );
-            } else {
-              return ListView.builder(
-                itemCount: snapshot.data.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: NetworkImage(snapshot.data[index].poster),
-                    ),
-                    trailing: Icon(Icons.chevron_right),
-                    title: Text(
-                      snapshot.data[index].region, 
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 17.0
-                      ),
-                    ),
-                    subtitle: Text(snapshot.data[index].web_address),
-                    onTap: () => {
-                      
-                    },
-                  );
-                },
-              );
-            }
-          },
+      body: ListView.separated(
+        separatorBuilder: (context, index) => Divider(
+          color: Colors.black12,
         ),
-      ),
+        itemCount: _regions.length,
+        itemBuilder: (BuildContext context, int index) {
+          return ListTile(
+            leading: Container(
+              width: 60.0,
+              height: 60.0,
+              // padding: const EdgeInsets.all(8.0),
+              decoration: new BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(_regions[index].poster)
+                ),
+                color: Colors.black.withOpacity(0.2),
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.all(Radius.circular(6.0))
+              )),
+            trailing: Icon(Icons.chevron_right),
+            title: Text(
+              _regions[index].region, 
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 21.0
+              ),
+            ),
+            subtitle: Text(
+              _regions[index].zone + "\nMakao makuu: "+
+              _regions[index].capital
+            ),
+            onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => DetailScreen(region: _regions[index],))
+              );
+            },
+          );
+        },
+      )
     );
   }
 }

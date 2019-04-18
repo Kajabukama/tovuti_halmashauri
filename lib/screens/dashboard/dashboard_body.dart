@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tovuti_halmashauri/screens/country/country.dart';
+import 'package:tovuti_halmashauri/screens/country/demo.dart';
 import 'package:tovuti_halmashauri/screens/region/region.dart';
 
 class DashboardScreenBody extends StatelessWidget {
@@ -66,7 +68,7 @@ class DashboardScreenBody extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => new CountryScreen()));
+                                    builder: (context) => new RegionScreen()));
                           },
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
@@ -122,7 +124,7 @@ class DashboardScreenBody extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => new CountryScreen()));
+                                    builder: (context) => new DemoScreen()));
                           },
                           child: Padding(
                             padding: const EdgeInsets.symmetric(

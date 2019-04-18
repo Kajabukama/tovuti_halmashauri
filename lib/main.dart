@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:tovuti_halmashauri/screens/country/country.dart';
 import 'package:tovuti_halmashauri/screens/region/region.dart';
 import 'package:tovuti_halmashauri/screens/dashboard/dashboard.dart';
-import 'package:tovuti_halmashauri/screens/slider/page_view.dart';
+import 'package:tovuti_halmashauri/screens/slider/slider.dart';
 import 'package:tovuti_halmashauri/screens/splash/splash_screen.dart';
 import 'package:tovuti_halmashauri/screens/home/home_screen.dart';
 
 void main() => runApp(new MaterialApp(
   debugShowCheckedModeBanner: false,
   theme: new ThemeData(
-    fontFamily: "Open Sans",
+    fontFamily: "Eina",
     primarySwatch: Colors.green,
     canvasColor: Colors.transparent,
     accentColor: Colors.greenAccent,
   ),
-  home: CountryScreen(),
+  home: SplashScreen(),
   routes: <String, WidgetBuilder>{
     '/splashScreen': (BuildContext context) => new SplashScreen(),
     '/homeScreen': (BuildContext context) => new HomeScreen(),

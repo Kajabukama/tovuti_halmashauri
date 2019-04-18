@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tovuti_halmashauri/screens/slider/page_view_indicator.dart';
+import 'package:tovuti_halmashauri/screens/slider/slider_indicator.dart';
 import 'package:tovuti_halmashauri/models/slider_model.dart';
 
 class PageSlider extends StatelessWidget {
@@ -62,7 +62,7 @@ class PageSliderBodyState extends State<PageSliderBody> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(height: 100.0),
+                  SizedBox(height: 80.0),
                   Container(
                       child: CircleAvatar(
                         backgroundColor: Color(0xFFf7fbff),
@@ -78,7 +78,7 @@ class PageSliderBodyState extends State<PageSliderBody> {
                       )),
                   Padding(
                     padding: const EdgeInsets.only(
-                        top: 50.0, left: 60.0, right: 40.0, bottom: 10.0),
+                        top: 30.0, left: 60.0, right: 40.0, bottom: 10.0),
                     child: Text(
                       pages[index].personName,
                       textAlign: TextAlign.center,
@@ -102,14 +102,14 @@ class PageSliderBodyState extends State<PageSliderBody> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
-                        top: 20.0, left: 60.0, right: 40.0, bottom: 10.0),
-                    child: Text(
-                      pages[index].personQuote,
+                        top: 10.0, left: 60.0, right: 40.0, bottom: 10.0),
+                    child: Text("\" "+
+                      pages[index].personQuote+" \"",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Color(pages[index].textColor),
                           fontWeight: FontWeight.w400,
-                          fontSize: 17.0),
+                          fontSize: 16.0),
                     ),
                   ),
                 ],
@@ -162,6 +162,7 @@ class PageIndicators extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      fit: StackFit.expand,
       children: <Widget>[
         Align(
             alignment: Alignment.center,
