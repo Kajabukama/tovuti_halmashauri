@@ -7,11 +7,12 @@ class Region {
   String population;
   String zone;
   String poster;
+  String profile;
   String webAddress;
 
   Region(
     {this.id,this.region,this.capital,this.districts,this.area,this.population,
-    this.zone,this.poster,this.webAddress}
+    this.zone,this.poster,this.profile,this.webAddress}
   );
 
   factory Region.fromJson(Map<String, dynamic> json){
@@ -24,6 +25,7 @@ class Region {
       population: json['population'],
       zone: json['zone'],
       poster: json['poster'],
+      profile: json['profile'],
       webAddress: json['webAddress']
     );
   }

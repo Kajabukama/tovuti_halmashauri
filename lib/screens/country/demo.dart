@@ -18,7 +18,7 @@ class DemoScreen extends StatelessWidget {
                         color: Colors.white,
                         fontSize: 16.0,
                       )),
-                  background: Image.asset("assets/suluhu.jpg",
+                  background: Image.asset("assets/president.jpg",
                     fit: BoxFit.cover,
                   )),
             ),

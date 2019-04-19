@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:tovuti_halmashauri/models/region_model.dart';
 import 'package:tovuti_halmashauri/models/district_model.dart';
+import 'package:tovuti_halmashauri/screens/region/web.dart';
 
 class DetailScreen extends StatefulWidget {
   final Region region;
@@ -30,7 +31,6 @@ class DetailScreenState extends State<DetailScreen> {
         districts.add(District.fromJson(districtJson));
       }
     }
-    print(districts);
     return districts;
   }
 
@@ -43,7 +43,7 @@ class DetailScreenState extends State<DetailScreen> {
     });
     super.initState();
   }
-
+  final webAsset = "http://tovuti.youtanzaniaadventure.co.tz/assets/posters/kilimanjaro.jpg";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,9 +52,19 @@ class DetailScreenState extends State<DetailScreen> {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              expandedHeight: 280.0,
+              expandedHeight: 200.0,
               floating: false,
               pinned: true,
+              actions: <Widget>[
+                IconButton(
+                  onPressed: ()=>{},
+                  icon: Icon(Icons.share),
+                ),
+                IconButton(
+                  onPressed: ()=>{},
+                  icon: Icon(Icons.more_vert),
+                )
+              ],
               flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
                   title: Text("Mkoa "+region.region,
@@ -62,7 +72,7 @@ class DetailScreenState extends State<DetailScreen> {
                     color: Colors.white,
                     fontSize: 18.0,
                   )),
-                  background: Image.network(region.poster,
+                  background: Image.network(region.profile,
                     fit: BoxFit.cover,
                     color: Colors.black.withOpacity(1.0),
                     colorBlendMode: BlendMode.softLight,
@@ -89,7 +99,7 @@ class DetailScreenState extends State<DetailScreen> {
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.all(Radius.circular(30.0))
                 )),
-              trailing: Icon(Icons.public, color: Colors.greenAccent,),
+              trailing: Icon(Icons.public, color: Colors.green.shade100,),
               title: Text(
                 _districts[index].district, 
                 style: TextStyle(
@@ -101,7 +111,7 @@ class DetailScreenState extends State<DetailScreen> {
                 _districts[index].web 
               ),
               onTap: (){
-                
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => new WebViewScreen(district: _districts[index])));
               },
             );
           },

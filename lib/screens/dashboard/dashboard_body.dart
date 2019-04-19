@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tovuti_halmashauri/screens/country/country.dart';
 import 'package:tovuti_halmashauri/screens/country/demo.dart';
 import 'package:tovuti_halmashauri/screens/region/region.dart';
+import 'package:tovuti_halmashauri/screens/tamisemi/home.dart';
 
 class DashboardScreenBody extends StatelessWidget {
   @override
@@ -11,7 +12,7 @@ class DashboardScreenBody extends StatelessWidget {
         fit: StackFit.expand,
         children: <Widget>[
           Container(
-            color: Color(0xFF1e90ff),
+            color: Color(0xFF2c3e50),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -68,7 +69,7 @@ class DashboardScreenBody extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => new RegionScreen()));
+                                    builder: (context) => new WebExplorer()));
                           },
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
@@ -96,7 +97,7 @@ class DashboardScreenBody extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => new CountryScreen()));
+                                    builder: (context) => new RegionScreen()));
                           },
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
@@ -117,7 +118,7 @@ class DashboardScreenBody extends StatelessWidget {
                       SizedBox(
                         width: double.infinity,
                         child: FlatButton(
-                          color: Color(0xFF26de81),
+                          color: Color(0xFF3498db),
                           shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(50.0)),
                           onPressed: () {
