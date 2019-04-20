@@ -3,9 +3,9 @@ class ArticleModel {
   String title;
   String content;
   String imageAsset;
-  String datePublished;
+  String published;
 
-  ArticleModel({this.id,this.title, this.content, this.imageAsset, this.datePublished});
+  ArticleModel({this.id,this.title, this.content, this.imageAsset, this.published});
 
   factory ArticleModel.fromJson(Map<String, dynamic> json){
     return ArticleModel(
@@ -13,7 +13,7 @@ class ArticleModel {
       title: json['title'],
       content: json['content'],
       imageAsset: json['imageAsset'],
-      datePublished: json['area'],
+      published: json['published'],
     );
   }
 }

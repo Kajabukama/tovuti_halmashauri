@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:async';
+import 'package:share/share.dart';
+
 import 'package:tovuti_halmashauri/models/district_model.dart';
 
 class WebViewScreen extends StatefulWidget {
@@ -25,10 +27,17 @@ class WebViewScreenState extends State<WebViewScreen> {
         centerTitle: true,
         title: Text(district.district),
         actions: <Widget>[
-          
+          IconButton(
+            icon: Icon(Icons.share),
+            color: Colors.white,
+            onPressed: (){
+              Share.share(district.web);
+            },
+          )
         ],
       ),
       body: WebView(
+        javaScriptMode: JavaScriptMode.unrestricted,
         initialUrl: district.web,
         onWebViewCreated: (WebViewController webViewController) {
           _controller.complete(webViewController);
@@ -45,6 +54,7 @@ class WebViewScreenState extends State<WebViewScreen> {
           (BuildContext context, AsyncSnapshot<WebViewController> controller) {
         if (controller.hasData) {
           return FloatingActionButton(
+            backgroundColor: Colors.blue,
             onPressed: () async {
               var url = await controller.data.currentUrl();
               _favorites.add(url);
@@ -52,7 +62,7 @@ class WebViewScreenState extends State<WebViewScreen> {
                 SnackBar(content: Text('Saved $url for later reading.')),
               );
             },
-            child: Icon(Icons.favorite),
+            child: Icon(Icons.mail_outline, color: Colors.white,),
           );
         }
         return Container();

@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tovuti_halmashauri/models/menu_model.dart';
 
-class CountryScreen extends StatefulWidget {
+class CountryScreen extends StatelessWidget {
   @override
-  CountryScreenState createState() => new CountryScreenState();
-}
-
-class CountryScreenState extends State<CountryScreen> {
-  @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
         child: Stack(
@@ -104,20 +99,34 @@ class CountryScreenState extends State<CountryScreen> {
           ],
         ),
       ),
-      appBar: AppBar(
-        title: Text("Tanzania")
-      ),
-      body: Container(
-        color: Colors.white,
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text("Tanzania information Screen")
-          ],
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              expandedHeight: 280.0,
+              floating: false,
+              pinned: true,
+              flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: true,
+                  title: Text("Habari na Matukio",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                      )),
+                  background: Image.asset("assets/kikwete.jpg",
+                    fit: BoxFit.cover,
+                  )),
+            ),
+          ];
+        },
+        body: Container(
+          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+          width: double.infinity,
+          alignment: Alignment.topLeft,
+          color: Colors.white,
+          child: Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\n \nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n \nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\n \nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\n \nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\n \nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
         ),
       ),
     );
-  }
+}
 }

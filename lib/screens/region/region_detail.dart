@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:share/share.dart';
+
 import 'package:tovuti_halmashauri/models/region_model.dart';
 import 'package:tovuti_halmashauri/models/district_model.dart';
 import 'package:tovuti_halmashauri/screens/region/web.dart';
@@ -57,13 +59,12 @@ class DetailScreenState extends State<DetailScreen> {
               pinned: true,
               actions: <Widget>[
                 IconButton(
-                  onPressed: ()=>{},
+                  onPressed: () {
+                    Share.share('Fikia Tovuti za Halmashauri mbalimbali Tanzania kiganjani mwako, pakua App ya Tovuti za Mikoa na Halmashauri za Tanzania sasa \n https://play.google.com/store/apps/details?id=com.boldtz.tovutizamikoa');
+                  },
                   icon: Icon(Icons.share),
                 ),
-                IconButton(
-                  onPressed: ()=>{},
-                  icon: Icon(Icons.more_vert),
-                )
+                
               ],
               flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
@@ -99,12 +100,12 @@ class DetailScreenState extends State<DetailScreen> {
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.all(Radius.circular(30.0))
                 )),
-              trailing: Icon(Icons.public, color: Colors.green.shade100,),
+              trailing: Icon(Icons.public, color: Colors.green.shade300,),
               title: Text(
                 _districts[index].district, 
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
-                  fontSize: 21.0
+                  fontSize: 18.0
                 ),
               ),
               subtitle: Text(

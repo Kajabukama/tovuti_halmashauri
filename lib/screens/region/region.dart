@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+
 import 'package:tovuti_halmashauri/models/region_model.dart';
 import 'package:tovuti_halmashauri/screens/about/about.dart';
 import 'package:tovuti_halmashauri/screens/region/region_detail.dart';
+import 'package:tovuti_halmashauri/shared/search.dart';
 
 class RegionScreen extends StatefulWidget {
   @override
@@ -49,8 +51,13 @@ class RegionScreenState extends State<RegionScreen> {
         centerTitle: true,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.share),
-            onPressed: (){},
+            icon: Icon(Icons.search),
+            onPressed: (){
+              showSearch(
+                context: context,
+                delegate: DataSearch()
+              );
+            },
           ),
           IconButton(
             icon: Icon(Icons.more_vert),
