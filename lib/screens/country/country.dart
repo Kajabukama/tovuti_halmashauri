@@ -1,10 +1,45 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:tovuti_halmashauri/models/menu_model.dart';
+import 'package:tovuti_halmashauri/models/article_model.dart';
 
-class CountryScreen extends StatelessWidget {
+class CountryScreen extends StatefulWidget {
+  @override
+  CountryState createState() => new CountryState();
+}
+class CountryState extends State<CountryScreen> {
+
+  List<Article> _articles = List<Article>();
+
+  Future<List<Article>> fetchArticles() async {
+    var url = "http://tovuti.youtanzaniaadventure.co.tz/api/articles/";
+    var response = await http.get(url);
+    var articles = List<Article>();
+    if(response.statusCode == 200){
+      var articlesJson = json.decode(response.body);
+      for(var articleJson in articlesJson){
+        articles.add(Article.fromJson(articleJson));
+      }
+    }
+    return articles;
+  }
+
+  @override
+  void initState() {
+    fetchArticles().then((value) {
+      setState(() {
+        _articles.addAll(value);
+      });
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       drawer: Drawer(
         child: Stack(
           fit: StackFit.expand,
@@ -23,11 +58,11 @@ class CountryScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Container(
-                          width: 100.0,
-                          height: 100.0,
+                          width: 80.0,
+                          height: 80.0,
                           decoration: new BoxDecoration(
                             image: DecorationImage(
-                              fit: BoxFit.cover,
+                              fit: BoxFit.fill,
                               image: AssetImage('assets/coat_arms.png')
                             ),
                             color: Colors.transparent,
@@ -44,16 +79,16 @@ class CountryScreen extends StatelessWidget {
                   Expanded(
                     flex: 3,
                     child: ListView.builder(
-                      itemCount: items.length,
+                      itemCount: _articles.length,
                       itemBuilder: (BuildContext context, int index){
                         return ListTile(
                           leading: Container(
-                          width: 60.0,
-                          height: 60.0,
+                          width: 50.0,
+                          height: 50.0,
                           decoration: new BoxDecoration(
                             image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: AssetImage(items[index].assetPath)
+                              image: NetworkImage(items[index].assetPath)
                             ),
                             color: Colors.black.withOpacity(0.2),
                             shape: BoxShape.rectangle,
@@ -103,7 +138,7 @@ class CountryScreen extends StatelessWidget {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              expandedHeight: 280.0,
+              expandedHeight: 250.0,
               floating: false,
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
@@ -113,19 +148,49 @@ class CountryScreen extends StatelessWidget {
                         color: Colors.white,
                         fontSize: 16.0,
                       )),
-                  background: Image.asset("assets/kikwete.jpg",
+                  background: Image.asset("assets/president.jpg",
                     fit: BoxFit.cover,
                   )),
             ),
           ];
         },
-        body: Container(
-          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
-          width: double.infinity,
-          alignment: Alignment.topLeft,
-          color: Colors.white,
-          child: Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\n \nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n \nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\n \nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\n \nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\n \nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
+        body: ListView.separated(
+        padding: EdgeInsets.only(bottom: 20.0, top: 10.0),
+        separatorBuilder: (context, index) => Divider(
+          color: Colors.black12,
         ),
+        itemCount: _articles.length,
+        itemBuilder: (BuildContext context, int index) {
+          return ListTile(
+            leading: Container(
+              alignment: Alignment.topLeft,
+              width: 50.0,
+              height: 50.0,
+              // padding: const EdgeInsets.all(8.0),
+              decoration: new BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(_articles[index].imageAsset),
+                  fit: BoxFit.fill
+                ),
+                color: Colors.black.withOpacity(0.2),
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.all(Radius.circular(25.0))
+              )),
+            trailing: Icon(Icons.chevron_right),
+            title: Text(
+              _articles[index].title, 
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 16.0
+              ),
+            ),
+            subtitle: Text("Imetolewa "+_articles[index].published),
+            onTap: (){
+              
+            },
+          );
+        },
+      )
       ),
     );
 }

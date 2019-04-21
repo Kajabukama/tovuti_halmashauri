@@ -17,6 +17,14 @@ class DataSearch extends SearchDelegate<String> {
   ];
 
   @override
+  ThemeData appBarTheme(BuildContext context) {
+    assert(context != null);
+    final ThemeData theme = Theme.of(context);
+    assert(theme != null);
+    return theme;
+  }
+
+  @override
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(

@@ -16,7 +16,6 @@ class RegionScreen extends StatefulWidget {
 class RegionScreenState extends State<RegionScreen> {
 
   List<Region> _regions = List<Region>();
-  bool isloading = false;
 
   Future<List<Region>> fetchRegions() async {
     var url = "http://tovuti.youtanzaniaadventure.co.tz/api/regions/";
@@ -70,6 +69,7 @@ class RegionScreenState extends State<RegionScreen> {
         ],
       ),
       body: ListView.separated(
+        padding: EdgeInsets.only(bottom: 20.0, top: 10.0),
         separatorBuilder: (context, index) => Divider(
           color: Colors.black12,
         ),
@@ -97,7 +97,7 @@ class RegionScreenState extends State<RegionScreen> {
               ),
             ),
             subtitle: Text(
-              _regions[index].zone + "\nMakao makuu: "+
+              _regions[index].zone + "\nMji makuu: "+
               _regions[index].capital
             ),
             onTap: (){

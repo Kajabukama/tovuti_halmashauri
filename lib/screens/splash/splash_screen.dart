@@ -66,7 +66,6 @@ class SplashScreenState extends State<SplashScreen> {
                               ),
                               child: Text("Ndugu Karibu, \nProgram hii ya Tovuti za Halmashauri na Serikali za Mitaa, imesanifiwa na Wizara ya TAMISEMI, kitengo cha Tehama wakishirikian na wadau wa Maenedeleo Tanzania.", 
                               style: TextStyle(
-                                fontFamily: "Open Sans",
                                 color: Colors.white,
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.w400

@@ -54,7 +54,7 @@ class DetailScreenState extends State<DetailScreen> {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              expandedHeight: 200.0,
+              expandedHeight: 250.0,
               floating: false,
               pinned: true,
               actions: <Widget>[
@@ -68,7 +68,7 @@ class DetailScreenState extends State<DetailScreen> {
               ],
               flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
-                  title: Text("Mkoa "+region.region,
+                  title: Text("Mkoa wa "+region.region,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
