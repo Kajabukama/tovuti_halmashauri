@@ -105,7 +105,7 @@ class DashboardScreenBody extends StatelessWidget {
                               'MIKOA/HALMASHAURI',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 18.0,
+                                  fontSize: 16.0,
                                   fontWeight: FontWeight.w600),
                             ),
                           ),
@@ -133,7 +133,7 @@ class DashboardScreenBody extends StatelessWidget {
                               'TANZANIA',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 18.0,
+                                  fontSize: 16.0,
                                   fontWeight: FontWeight.w600),
                             ),
                           ),

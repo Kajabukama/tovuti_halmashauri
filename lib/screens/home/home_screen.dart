@@ -5,20 +5,20 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      backgroundColor: Color(0xFF045691),
+      backgroundColor: Color(0xFF0abde3),
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
           Container(
             width: double.infinity,
-            color: Color(0xFF2d98da),
+            // color: Color(0xFF2d98da),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Container(
-                    width: 100.0,
-                    height: 100.0,
+                    width: 70.0,
+                    height: 70.0,
                     padding: const EdgeInsets.all(8.0),
                     decoration: new BoxDecoration(
                       image: DecorationImage(
@@ -30,13 +30,13 @@ class HomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       top: 20.0, left: 60.0, right: 40.0, bottom: 30.0),
                   child: Text(
-                    "Tovuti za Mikoa na Halmashauri",
+                    "Tovuti za Mikoa na Halmashauri Tanzania",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        fontFamily: "Open Sans",
+                        // fontFamily: "Open Sans",
                         color: Color(0xFFecf0f1),
                         fontWeight: FontWeight.w200,
-                        fontSize: 28.0),
+                        fontSize: 23.0),
                   ),
                 ),
                 Padding(
@@ -73,7 +73,7 @@ class HomeScreen extends StatelessWidget {
               height: 100.0,
               alignment: Alignment.center,
               child: FlatButton(
-                color: Colors.yellow,
+                color: Color(0xFF48dbfb),
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(50.0)),
                 onPressed: () {
@@ -88,9 +88,9 @@ class HomeScreen extends StatelessWidget {
                   child: Text(
                     'Karibu',
                     style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontSize: 18.0,
-                        fontWeight: FontWeight.w700),
+                        fontWeight: FontWeight.w600),
                   ),
                 ),
               ),

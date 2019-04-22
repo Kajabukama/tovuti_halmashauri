@@ -51,18 +51,11 @@ class SplashScreenState extends State<SplashScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Padding(
-                              padding: EdgeInsets.only(top: 20.0),
-                              child: Text("OR-Tamisemi \nTovuti Halmashauri", 
-                              style: TextStyle(
-                                color: Colors.greenAccent
-                              ), textAlign: TextAlign.center,),
-                            ),
-                            Padding(
                               padding: EdgeInsets.only(
                                 top: 80.0,
                                 bottom: 20.0,
-                                left: 80.0,
-                                right: 80.0,
+                                left: 40.0,
+                                right: 40.0,
                               ),
                               child: Text("Ndugu Karibu, \nProgram hii ya Tovuti za Halmashauri na Serikali za Mitaa, imesanifiwa na Wizara ya TAMISEMI, kitengo cha Tehama wakishirikian na wadau wa Maenedeleo Tanzania.", 
                               style: TextStyle(

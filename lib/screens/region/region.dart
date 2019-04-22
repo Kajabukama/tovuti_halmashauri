@@ -45,7 +45,7 @@ class RegionScreenState extends State<RegionScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        // leading: Icon(Icons.menu),
+        backgroundColor: Color(0xFF35c680),
         title: Text("Mikoa na Halmashauri"),
         centerTitle: true,
         actions: <Widget>[

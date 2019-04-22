@@ -137,6 +137,15 @@ class CountryState extends State<CountryScreen> {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
+              backgroundColor: Color(0xFF35c680),
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.home),
+                  onPressed: (){
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
               expandedHeight: 250.0,
               floating: false,
               pinned: true,

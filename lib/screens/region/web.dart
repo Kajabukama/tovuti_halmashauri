@@ -24,6 +24,7 @@ class WebViewScreenState extends State<WebViewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xFF35c680),
         centerTitle: true,
         title: Text(district.district),
         actions: <Widget>[

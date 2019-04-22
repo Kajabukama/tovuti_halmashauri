@@ -23,6 +23,7 @@ class DetailScreenState extends State<DetailScreen> {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
+              backgroundColor: Color(0xFF35c680),
               expandedHeight: 250.0,
               floating: false,
               pinned: true,
