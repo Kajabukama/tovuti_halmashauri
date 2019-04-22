@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:tovuti_halmashauri/models/menu_model.dart';
 import 'package:tovuti_halmashauri/models/article_model.dart';
+import 'package:tovuti_halmashauri/screens/country/country_details.dart';
 
 class CountryScreen extends StatefulWidget {
   @override
@@ -45,7 +46,7 @@ class CountryState extends State<CountryScreen> {
           fit: StackFit.expand,
           children: <Widget>[
             Container(
-              color: Color(0xFF27ae60),
+              color: Color(0xFF222f3e),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -69,17 +70,15 @@ class CountryState extends State<CountryScreen> {
                             shape: BoxShape.rectangle,
                             borderRadius: BorderRadius.all(Radius.circular(0.0))
                           )),
-                          SizedBox(height: 20.0,),
-                          Text("OR-TAMISEMI", style: TextStyle(color: Colors.white),),
+                          
                         ],
                       )
                     ),
                   ),
-                  Divider(height: 3.0,),
                   Expanded(
                     flex: 3,
                     child: ListView.builder(
-                      itemCount: _articles.length,
+                      itemCount: items.length,
                       itemBuilder: (BuildContext context, int index){
                         return ListTile(
                           leading: Container(
@@ -186,7 +185,10 @@ class CountryState extends State<CountryScreen> {
             ),
             subtitle: Text("Imetolewa "+_articles[index].published),
             onTap: (){
-              
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => DetailScreen(article: _articles[index],))
+              );
             },
           );
         },

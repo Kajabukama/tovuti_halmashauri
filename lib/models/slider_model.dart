@@ -19,7 +19,7 @@ class PageModel {
 
 List<PageModel> pages = [
   PageModel(
-      screenColor: 0xFF1e90ff,
+      screenColor: 0xFF2d98da,
       textColor: 0xFFFFFFFF,
       personName: 'John JP. Magufuli',
       personTitle: 'Rais wa Tanzania',

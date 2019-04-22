@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
         children: <Widget>[
           Container(
             width: double.infinity,
-            color: Color(0xFF1e90ff),
+            color: Color(0xFF2d98da),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
