@@ -23,6 +23,7 @@ class DetailScreenState extends State<DetailScreen> {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
+              centerTitle: true,
               backgroundColor: Color(0xFF35c680),
               expandedHeight: 250.0,
               floating: false,
@@ -52,8 +53,8 @@ class DetailScreenState extends State<DetailScreen> {
                   ),
                   background: Image.network(article.imageAsset,
                     fit: BoxFit.cover,
-                    // color: Colors.black.withOpacity(1.0),
-                    // colorBlendMode: BlendMode.overlay,
+                    color: Colors.black.withOpacity(0.5),
+                    colorBlendMode: BlendMode.luminosity,
                   )),
             ),
           ];
@@ -62,21 +63,41 @@ class DetailScreenState extends State<DetailScreen> {
           padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(bottom: 15.0, top: 20.0),
-                  child: Text(
-                    article.title, 
-                    style: TextStyle(
-                      fontSize: 21.0,
-                      fontWeight: FontWeight.w600
-                    ),
+                Container(
+                  padding: EdgeInsets.only(top: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.only(right: 10.0),
+                        child: SizedBox(
+                          width: 50.0,
+                          height: 50.0,
+                          child: Image(
+                            image: AssetImage("assets/coat_arms.png"),
+                          ),
+                        )
+                      ),
+                      Container(
+                        child: Expanded(
+                          flex: 2,
+                          child: Text(article.title, 
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.w600
+                          ),),
+                        )
+                      )
+                    ],
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 20.0),
-                  child: Text(
-                    article.content,
+                Container(
+                  padding: EdgeInsets.only(bottom: 20.0, top: 20.0),
+                  child: Text(article.content,
                     style: TextStyle(
                       fontSize: 16.0
                     ),

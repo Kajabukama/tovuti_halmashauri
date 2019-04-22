@@ -213,7 +213,8 @@ class CountryState extends State<CountryScreen> {
                 color: Colors.black.withOpacity(0.2),
                 shape: BoxShape.rectangle,
                 borderRadius: BorderRadius.all(Radius.circular(25.0))
-              )),
+              )
+            ),
             trailing: Icon(Icons.chevron_right),
             title: Text(
               _articles[index].title, 

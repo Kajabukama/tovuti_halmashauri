@@ -82,8 +82,8 @@ class DetailScreenState extends State<DetailScreen> {
                   )),
                   background: Image.network(region.profile,
                     fit: BoxFit.cover,
-                    color: Colors.black.withOpacity(1.0),
-                    colorBlendMode: BlendMode.softLight,
+                    color: Colors.black.withOpacity(0.6),
+                    colorBlendMode: BlendMode.luminosity,
                   )),
             ),
           ];
