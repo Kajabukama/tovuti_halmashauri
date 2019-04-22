@@ -21,13 +21,19 @@ class DetailScreenState extends State<DetailScreen> {
   DetailScreenState(this.region);  
 
   List<District> _districts = List<District>();
-  bool isloading = false;
+  bool isLoading = false;
 
   Future<List<District>> fetchDistricts(var regid) async {
+    setState(() {
+      isLoading = true;
+    });
     var url = "http://tovuti.youtanzaniaadventure.co.tz/api/districts/district/"+(regid).toString();
     var response = await http.get(url);
     var districts = List<District>();
     if(response.statusCode == 200){
+      setState(() {
+        isLoading = false;
+      });
       var districtsJson = json.decode(response.body);
       for(var districtJson in districtsJson){
         districts.add(District.fromJson(districtJson));
@@ -82,7 +88,26 @@ class DetailScreenState extends State<DetailScreen> {
             ),
           ];
         },
-        body: ListView.separated(
+        body: isLoading ? Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            CircularProgressIndicator(
+              strokeWidth: 2.0,
+            ),
+            SizedBox(height: 50.0,),
+            Text(
+              "Inachakata, subiri ...", 
+              style: TextStyle(
+                fontSize: 16.0,
+                color: Colors.black45,
+                fontWeight: FontWeight.w400
+              ),)
+          ],
+        ),
+      )
+      :ListView.separated(
           separatorBuilder: (context, index) => Divider(
             color: Colors.black12,
           ),

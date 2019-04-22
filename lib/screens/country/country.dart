@@ -13,12 +13,19 @@ class CountryScreen extends StatefulWidget {
 class CountryState extends State<CountryScreen> {
 
   List<Article> _articles = List<Article>();
+  var isLoading = false;
 
   Future<List<Article>> fetchArticles() async {
+    setState(() {
+      isLoading= true;
+    });
     var url = "http://tovuti.youtanzaniaadventure.co.tz/api/articles/";
     var response = await http.get(url);
     var articles = List<Article>();
     if(response.statusCode == 200){
+      setState(() {
+        isLoading= false;
+      });
       var articlesJson = json.decode(response.body);
       for(var articleJson in articlesJson){
         articles.add(Article.fromJson(articleJson));
@@ -144,17 +151,21 @@ class CountryState extends State<CountryScreen> {
                   onPressed: (){
                     Navigator.of(context).pop();
                   },
-                )
+                ),
+                IconButton(
+                  icon: Icon(Icons.share),
+                  onPressed: (){},
+                ),
               ],
               expandedHeight: 250.0,
               floating: false,
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
-                  title: Text("Habari na Matukio",
+                  title: Text("Habari Mbalimbali",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 16.0,
+                        fontSize: 18.0,
                       )),
                   background: Image.asset("assets/president.jpg",
                     fit: BoxFit.cover,
@@ -162,7 +173,26 @@ class CountryState extends State<CountryScreen> {
             ),
           ];
         },
-        body: ListView.separated(
+        body: isLoading ? Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              CircularProgressIndicator(
+                strokeWidth: 2.0,
+              ),
+              SizedBox(height: 50.0,),
+              Text(
+                "Inachakata, subiri ...", 
+                style: TextStyle(
+                  fontSize: 16.0,
+                  color: Colors.black45,
+                  fontWeight: FontWeight.w400
+                ),)
+            ],
+          ),
+        )
+        : ListView.separated(
         padding: EdgeInsets.only(bottom: 20.0, top: 10.0),
         separatorBuilder: (context, index) => Divider(
           color: Colors.black12,

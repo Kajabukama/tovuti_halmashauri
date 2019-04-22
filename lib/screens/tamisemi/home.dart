@@ -17,9 +17,19 @@ class _ExplorerState extends State<WebExplorer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xFF35c680),
         centerTitle: true,
         title: const Text('OR-TAMISEMI'),
-        actions: <Widget>[],
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.share, color: Colors.white,),
+            onPressed: (){},
+          ),
+          IconButton(
+            icon: Icon(Icons.more_vert),
+            onPressed: (){},
+          )
+        ],
       ),
       body: WebView(
         javaScriptMode: JavaScriptMode.unrestricted,

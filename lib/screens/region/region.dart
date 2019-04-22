@@ -16,12 +16,19 @@ class RegionScreen extends StatefulWidget {
 class RegionScreenState extends State<RegionScreen> {
 
   List<Region> _regions = List<Region>();
+  var isLoading = false;
 
   Future<List<Region>> fetchRegions() async {
+    setState(() {
+      isLoading= true;
+    });
     var url = "http://tovuti.youtanzaniaadventure.co.tz/api/regions/";
     var response = await http.get(url);
     var regions = List<Region>();
     if(response.statusCode == 200){
+      setState(() {
+        isLoading= false;
+      });
       var regionsJson = json.decode(response.body);
       for(var regionJson in regionsJson){
         regions.add(Region.fromJson(regionJson));
@@ -68,7 +75,25 @@ class RegionScreenState extends State<RegionScreen> {
           )
         ],
       ),
-      body: ListView.separated(
+      body: isLoading ? Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            CircularProgressIndicator(
+              strokeWidth: 2.0,
+            ),
+            SizedBox(height: 50.0,),
+            Text(
+              "Inachakata, subiri ...", 
+              style: TextStyle(
+                fontSize: 16.0,
+                color: Colors.black45,
+                fontWeight: FontWeight.w400
+              ),)
+          ],
+        ),
+      ) : ListView.separated(
         padding: EdgeInsets.only(bottom: 20.0, top: 10.0),
         separatorBuilder: (context, index) => Divider(
           color: Colors.black12,
