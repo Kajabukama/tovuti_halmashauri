@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
+import 'package:tovuti_halmashauri/screens/about/about.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:async';
@@ -17,17 +19,22 @@ class _ExplorerState extends State<WebExplorer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF35c680),
         centerTitle: true,
         title: const Text('OR-TAMISEMI'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.share, color: Colors.white,),
-            onPressed: (){},
+            onPressed: (){
+              Share.share('Fikia Tovuti za Halmashauri mbalimbali Tanzania kiganjani mwako, pakua App ya Tovuti za Mikoa na Halmashauri za Tanzania sasa \n https://play.google.com/store/apps/details?id=com.boldtz.tovutizamikoa');
+            },
           ),
           IconButton(
             icon: Icon(Icons.more_vert),
-            onPressed: (){},
+            onPressed: (){
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => new AboutScreen())
+              );
+            },
           )
         ],
       ),

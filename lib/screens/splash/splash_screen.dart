@@ -23,7 +23,7 @@ class SplashScreenState extends State<SplashScreen> {
         fit: StackFit.expand,
         children: <Widget>[
           Container(
-            color: Color(0xFF27ae60),
+            color: Color(0xFF1AC5FF),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -79,11 +79,14 @@ class SplashScreenState extends State<SplashScreen> {
                     children: <Widget>[
                       SizedBox(
                         child: CircularProgressIndicator(
-                          strokeWidth: 2.0,
+                          strokeWidth: 3.0,
                         ),
                       ),
-                      Padding(padding: EdgeInsets.only(top: 30.0), child:Text('Toleo 3.0.3', style: TextStyle(color: Colors.greenAccent),),),
-                      
+                      Padding(padding: EdgeInsets.only(top: 30.0), child:Text('Toleo 3.0.3', 
+                      style: TextStyle(
+                        color: Colors.white54),
+                        ),
+                      ),
                     ],
                   ),
                 ),

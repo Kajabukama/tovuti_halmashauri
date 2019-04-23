@@ -144,7 +144,6 @@ class CountryState extends State<CountryScreen> {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              backgroundColor: Color(0xFF35c680),
               actions: <Widget>[
                 IconButton(
                   icon: Icon(Icons.home),
@@ -169,6 +168,8 @@ class CountryState extends State<CountryScreen> {
                       )),
                   background: Image.asset("assets/president.jpg",
                     fit: BoxFit.cover,
+                    color: Colors.black.withOpacity(0.4),
+                    colorBlendMode: BlendMode.luminosity,
                   )),
             ),
           ];

@@ -61,6 +61,34 @@ class DashboardScreenBody extends StatelessWidget {
                       SizedBox(
                         width: double.infinity,
                         child: FlatButton(
+                          color: Color(0xFF20bf6b),
+                          shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(50.0)),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => new RegionScreen()));
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 18.0, horizontal: 10.0),
+                            child: Text(
+                              'Tovuti za Mikoa na Halmashauri',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5.0,
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: FlatButton(
                           color: Color(0xFFFFEB00),
                           shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(50.0)),
@@ -83,41 +111,14 @@ class DashboardScreenBody extends StatelessWidget {
                           ),
                         ),
                       ),
+                      
                       SizedBox(
                         height: 5.0,
                       ),
                       SizedBox(
                         width: double.infinity,
                         child: FlatButton(
-                          color: Color(0xFF20bf6b),
-                          shape: new RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(50.0)),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => new RegionScreen()));
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 18.0, horizontal: 50.0),
-                            child: Text(
-                              'MIKOA/HALMASHAURI',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5.0,
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: FlatButton(
-                          color: Color(0xFF3498db),
+                          color: Color(0xFF1AC5FF),
                           shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(50.0)),
                           onPressed: () {

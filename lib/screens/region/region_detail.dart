@@ -60,7 +60,6 @@ class DetailScreenState extends State<DetailScreen> {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              backgroundColor: Color(0xFF35c680),
               expandedHeight: 250.0,
               floating: false,
               pinned: true,
@@ -82,7 +81,7 @@ class DetailScreenState extends State<DetailScreen> {
                   )),
                   background: Image.network(region.profile,
                     fit: BoxFit.cover,
-                    color: Colors.black.withOpacity(0.6),
+                    color: Colors.black.withOpacity(0.4),
                     colorBlendMode: BlendMode.luminosity,
                   )),
             ),

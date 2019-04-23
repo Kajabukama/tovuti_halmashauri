@@ -24,7 +24,6 @@ class DetailScreenState extends State<DetailScreen> {
           return <Widget>[
             SliverAppBar(
               centerTitle: true,
-              backgroundColor: Color(0xFF35c680),
               expandedHeight: 250.0,
               floating: false,
               pinned: true,
@@ -53,7 +52,7 @@ class DetailScreenState extends State<DetailScreen> {
                   ),
                   background: Image.network(article.imageAsset,
                     fit: BoxFit.cover,
-                    color: Colors.black.withOpacity(0.5),
+                    color: Colors.black.withOpacity(0.4),
                     colorBlendMode: BlendMode.luminosity,
                   )),
             ),
@@ -85,11 +84,30 @@ class DetailScreenState extends State<DetailScreen> {
                       Container(
                         child: Expanded(
                           flex: 2,
-                          child: Text(article.title, 
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.w600
-                          ),),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 5.0),
+                                child: Text(article.title, 
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w600
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(),
+                                child: Text("Imetolewa Tarehe " + article.published, 
+                                  style: TextStyle(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.black38
+                                  ),
+                                ),
+                              )
+                            ],
+                          )
                         )
                       )
                     ],

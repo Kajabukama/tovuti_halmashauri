@@ -9,6 +9,7 @@ void main() => runApp(new MaterialApp(
   debugShowCheckedModeBanner: false,
   theme: new ThemeData(
     fontFamily: "Eina",
+    primaryColor: Colors.green,
     canvasColor: Colors.transparent,
     accentColor: Colors.greenAccent,
   ),
