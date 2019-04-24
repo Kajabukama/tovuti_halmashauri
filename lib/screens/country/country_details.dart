@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
+import 'package:tovuti_halmashauri/constants/contents.dart';
+import 'package:tovuti_halmashauri/constants/popup.dart';
 
 import 'package:tovuti_halmashauri/models/article_model.dart';
+import 'package:tovuti_halmashauri/screens/about/about.dart';
+import 'package:tovuti_halmashauri/screens/home/home_screen.dart';
 
 class DetailScreen extends StatefulWidget {
   final Article article;
@@ -30,14 +34,22 @@ class DetailScreenState extends State<DetailScreen> {
               actions: <Widget>[
                 IconButton(
                   onPressed: () {
-                    Share.share('Fikia Tovuti za Halmashauri mbalimbali Tanzania kiganjani mwako, pakua App ya Tovuti za Mikoa na Halmashauri za Tanzania sasa \n https://play.google.com/store/apps/details?id=com.boldtz.tovutizamikoa');
+                    Share.share(Contents.Share);
                   },
                   icon: Icon(Icons.share),
                 ),
-                IconButton(
-                  onPressed: (){},
+                PopupMenuButton<String>(
+                  onSelected: choiceAction,
                   icon: Icon(Icons.more_vert),
-                )
+                  itemBuilder: (BuildContext context) {
+                    return Constants.choices.map((String choice){
+                      return PopupMenuItem<String>(
+                        value: choice,
+                        child: Text(choice),
+                      );
+                    }).toList();
+                  },
+                ),
                 
               ],
               flexibleSpace: FlexibleSpaceBar(
@@ -127,5 +139,15 @@ class DetailScreenState extends State<DetailScreen> {
         )
       ),
     );
+  }
+  void choiceAction(String choice) {
+    switch(choice){
+      case Constants.About:
+        Navigator.push(context, MaterialPageRoute(builder: (_)=> AboutScreen()));
+        break;
+      case Constants.Home:
+        Navigator.push(context, MaterialPageRoute(builder: (_)=> HomeScreen()));
+        break;
+    }
   }
 }

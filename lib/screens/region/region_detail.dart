@@ -3,10 +3,15 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:share/share.dart';
+import 'package:tovuti_halmashauri/constants/contents.dart';
+import 'package:tovuti_halmashauri/constants/popup.dart';
 
 import 'package:tovuti_halmashauri/models/region_model.dart';
 import 'package:tovuti_halmashauri/models/district_model.dart';
+import 'package:tovuti_halmashauri/screens/about/about.dart';
+import 'package:tovuti_halmashauri/screens/dashboard/dashboard.dart';
 import 'package:tovuti_halmashauri/screens/region/web.dart';
+import 'package:tovuti_halmashauri/shared/endpoints.dart';
 
 class DetailScreen extends StatefulWidget {
   final Region region;
@@ -27,7 +32,7 @@ class DetailScreenState extends State<DetailScreen> {
     setState(() {
       isLoading = true;
     });
-    var url = "http://tovuti.youtanzaniaadventure.co.tz/api/districts/district/"+(regid).toString();
+    var url = Endpoint.districts+(regid).toString();
     var response = await http.get(url);
     var districts = List<District>();
     if(response.statusCode == 200){
@@ -51,7 +56,7 @@ class DetailScreenState extends State<DetailScreen> {
     });
     super.initState();
   }
-  final webAsset = "http://tovuti.youtanzaniaadventure.co.tz/assets/posters/kilimanjaro.jpg";
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,9 +71,21 @@ class DetailScreenState extends State<DetailScreen> {
               actions: <Widget>[
                 IconButton(
                   onPressed: () {
-                    Share.share('Fikia Tovuti za Halmashauri mbalimbali Tanzania kiganjani mwako, pakua App ya Tovuti za Mikoa na Halmashauri za Tanzania sasa \n https://play.google.com/store/apps/details?id=com.boldtz.tovutizamikoa');
+                    Share.share(Contents.Share);
                   },
                   icon: Icon(Icons.share),
+                ),
+                PopupMenuButton<String>(
+                  onSelected: choiceAction,
+                  icon: Icon(Icons.more_vert),
+                  itemBuilder: (BuildContext context) {
+                    return Constants.choices.map((String choice){
+                      return PopupMenuItem<String>(
+                        value: choice,
+                        child: Text(choice),
+                      );
+                    }).toList();
+                  },
                 ),
                 
               ],
@@ -144,5 +161,15 @@ class DetailScreenState extends State<DetailScreen> {
         )
       ),
     );
+  }
+  void choiceAction(String choice) {
+    switch(choice){
+      case Constants.About:
+        Navigator.push(context, MaterialPageRoute(builder: (_)=> AboutScreen()));
+        break;
+      case Constants.Home:
+        Navigator.push(context, MaterialPageRoute(builder: (_)=> DashboardScreen()));
+        break;
+    }
   }
 }

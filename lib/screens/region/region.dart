@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:tovuti_halmashauri/constants/popup.dart';
 
 import 'package:tovuti_halmashauri/models/region_model.dart';
 import 'package:tovuti_halmashauri/screens/about/about.dart';
+import 'package:tovuti_halmashauri/screens/dashboard/dashboard.dart';
 import 'package:tovuti_halmashauri/screens/region/region_detail.dart';
+import 'package:tovuti_halmashauri/shared/endpoints.dart';
 import 'package:tovuti_halmashauri/shared/search.dart';
 
 class RegionScreen extends StatefulWidget {
@@ -22,7 +25,7 @@ class RegionScreenState extends State<RegionScreen> {
     setState(() {
       isLoading= true;
     });
-    var url = "http://tovuti.youtanzaniaadventure.co.tz/api/regions/";
+    var url = Endpoint.regions;
     var response = await http.get(url);
     var regions = List<Region>();
     if(response.statusCode == 200){
@@ -64,14 +67,18 @@ class RegionScreenState extends State<RegionScreen> {
               );
             },
           ),
-          IconButton(
+          PopupMenuButton<String>(
+            onSelected: choiceAction,
             icon: Icon(Icons.more_vert),
-            onPressed: (){
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => new AboutScreen())
-              );
+            itemBuilder: (BuildContext context) {
+              return Constants.choices.map((String choice){
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(choice),
+                );
+              }).toList();
             },
-          )
+          ),
         ],
       ),
       body: isLoading ? Center(
@@ -84,11 +91,11 @@ class RegionScreenState extends State<RegionScreen> {
             ),
             SizedBox(height: 50.0,),
             Text(
-              "Inachakata, subiri ...", 
+              "Inachakata, ...", 
               style: TextStyle(
                 fontSize: 16.0,
                 color: Colors.black45,
-                fontWeight: FontWeight.w400
+                fontWeight: FontWeight.w600
               ),)
           ],
         ),
@@ -134,5 +141,15 @@ class RegionScreenState extends State<RegionScreen> {
         },
       )
     );
+  }
+  void choiceAction(String choice) {
+    switch(choice){
+      case Constants.About:
+        Navigator.push(context, MaterialPageRoute(builder: (_)=> AboutScreen()));
+        break;
+      case Constants.Home:
+        Navigator.push(context, MaterialPageRoute(builder: (_)=> DashboardScreen()));
+        break;
+    }
   }
 }

@@ -19,6 +19,33 @@ class PageModel {
 
 List<PageModel> pages = [
   PageModel(
+      screenColor: 0xFF20BF6B,
+      textColor: 0xFFFFFFFF,
+      personName: 'Mwl. Julius K. Nyerere',
+      personTitle: 'Rais wa Kwanza, wa Jamhuri ya Muungano Tanzani',
+      personQuote:
+          'Ukweli una tabia moja nzuri sana, haujali mkubwa au mdogo;haujali rafiki au adui; kwake watu wote ni sawa.',
+      assetPath: 'assets/nyerere.jpg'
+  ),
+  PageModel(
+      screenColor: 0xFF00CEC9,
+      textColor: 0xFFFFFFFF,
+      personName: 'Mhe. Benjamini W. Mkapa',
+      personTitle: 'Rais Mstaafu, wa Jamhuri ya Muungano Tanzani',
+      personQuote:
+          'Ni Heri umasikini katika UHURU kuliko utajiri katika utumwa.',
+      assetPath: 'assets/mkapa.jpg'
+  ),
+  PageModel(
+      screenColor: 0xFF22a6b3,
+      textColor: 0xFFFFFFFF,
+      personName: 'Mhe. Dkt. Jakaya M. Kikwete',
+      personTitle: 'Rais Mstaafu, wa Jamhuri ya Muungano Tanzani',
+      personQuote:
+          'Lengo letu kuu ni kusukuma ukuaji wa uchumi kwa ARI MPAYA, NGUVU MPYA na KASI MPYA ili kuwa na MAISHA BORA KWA KILA MTANZANIA.',
+      assetPath: 'assets/kikwete.jpg'
+  ),
+  PageModel(
       screenColor: 0xFF1AC5FF,
       textColor: 0xFFFFFFFF,
       personName: 'Mhe. Dkt John Pombe. Magufuli',
@@ -53,34 +80,5 @@ List<PageModel> pages = [
       personQuote:
           'Hakuna maendeleo bila kuwa na nidhamu katika utendaji wa kazi. Wananchi wanahitaji huduma bora na huduma bora haitapatikana kama watendaji wa Serikali hawatakuwa na nidhamu na hofu ya Mungu.',
       assetPath: 'assets/jafo.jpg'
-  ),
-  PageModel(
-      screenColor: 0xFF00ACE6,
-      textColor: 0xFFFFFFFF,
-      personName: 'Mhe. Dkt. Jakaya M. Kikwete',
-      personTitle: 'Rais Mstaafu, wa Jamhuri ya Muungano Tanzani',
-      personQuote:
-          'Lengo letu kuu ni kusukuma ukuaji wa uchumikwa ARI MPAYA, NGUVU MPYA na KASI MPYA ili kuwa na MAISHA BORA KWA KILA MTANZANIA.',
-      assetPath: 'assets/kikwete.jpg'
-  ),
-  PageModel(
-      screenColor: 0xFF00ACE6,
-      textColor: 0xFFFFFFFF,
-      personName: 'Mhe. Benjamini W. Mkapa',
-      personTitle: 'Rais Mstaafu, wa Jamhuri ya Muungano Tanzani',
-      personQuote:
-          'Ni Heri umasikini katika UHURU kuliko utajiri katika utumwa.',
-      assetPath: 'assets/mkapa.jpg'
-  ),
-  PageModel(
-      screenColor: 0xFF00ACE6,
-      textColor: 0xFFFFFFFF,
-      personName: 'Mwl. Julius K. Nyerere',
-      personTitle: 'Rais wa Kwanza, wa Jamhuri ya Muungano Tanzani',
-      personQuote:
-          'Ukweli una tabia moja nzuri sana, haujali mkubwa au mdogo;haujali rafiki au adui; kwake watu wote ni sawa.',
-      assetPath: 'assets/nyerere.jpg'
-  ),
-
-
+  )
 ];

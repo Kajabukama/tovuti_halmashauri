@@ -39,7 +39,7 @@ class PageSliderBodyState extends State<PageSliderBody> {
     if (_pageController.hasClients) {
       double page = _pageController.page ?? _pageController.initialPage;
       setState(() {
-        if (page >= 2.5) {
+        if (page >= 5.5) {
           _bottomState = CrossFadeState.showSecond;
         } else {
           _bottomState = CrossFadeState.showFirst;
@@ -168,23 +168,23 @@ class PageIndicators extends StatelessWidget {
             alignment: Alignment.center,
             child: PageViewIndicator(
               controller: pageController,
-              pageCount: 4,
+              pageCount: 7,
               color: Colors.white,
             )),
         Align(
           alignment: Alignment.centerRight,
           child: InkWell(
             onTap: () {
-              pageController.animateToPage(3,
+              pageController.animateToPage(6,
                   curve: Curves.decelerate,
                   duration: Duration(milliseconds: 500));
             },
             child: Padding(
               padding:
-                  const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+                  const EdgeInsets.symmetric(vertical: 30.0, horizontal: 44.0),
               child: Text(
-                'Endelea',
-                textAlign: TextAlign.end,
+                'Mwisho',
+                textAlign: TextAlign.left,
                 style: TextStyle(
                     color: Color(0xFFFFFFFF),
                     fontWeight: FontWeight.w400,
