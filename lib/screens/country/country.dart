@@ -70,11 +70,7 @@ class CountryState extends State<CountryScreen> {
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
-                  title: Text("Habari Mbalimbali",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18.0,
-                      )),
+                  title: Text("Habari Mbalimbali"),
                   background: Image.asset("assets/president.jpg",
                     fit: BoxFit.cover,
                     color: Colors.black.withOpacity(0.4),
