@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import 'package:tovuti_halmashauri/constants/contents.dart';
 import 'package:tovuti_halmashauri/constants/popup.dart';
 
@@ -14,7 +15,7 @@ import 'package:tovuti_halmashauri/screens/about/about.dart';
 import 'package:tovuti_halmashauri/screens/dashboard/dashboard.dart';
 import 'package:tovuti_halmashauri/shared/endpoints.dart';
 import 'package:tovuti_halmashauri/widgets/indicator.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+
 
 class DetailScreen extends StatefulWidget {
   final Region region;

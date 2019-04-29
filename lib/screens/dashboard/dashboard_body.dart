@@ -1,4 +1,7 @@
+import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import 'package:tovuti_halmashauri/screens/country/country.dart';
 import 'package:tovuti_halmashauri/screens/region/region.dart';
 import 'package:tovuti_halmashauri/screens/tamisemi/home.dart';
@@ -92,12 +95,22 @@ class DashboardScreenBody extends StatelessWidget {
                           color: Color(0xFFFFEB00),
                           shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(50.0)),
-                          onPressed: () {
+                          onPressed: () async {
+                            if (Platform.isAndroid) {
+                              Route route = MaterialPageRoute(
+                                builder: (context) => new WebViewPage("http://tamisemi.go.tz")
+                              );
+                              Navigator.push(context, route);
+                            } else if (Platform.isIOS) {
+                              await launch("http://tamisemi.go.tz");
+                            }
                             Navigator.push(
-                                context,
+                              context,
                                 MaterialPageRoute(
-                                    builder: (context) => new WebExplorer()));
-                          },
+                                    builder: (context) => new WebExplorer()
+                                )
+                              );
+                            },
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 18.0, horizontal: 80.0),
@@ -148,6 +161,23 @@ class DashboardScreenBody extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+}
+
+class WebViewPage extends StatelessWidget {
+  WebViewPage(this.url);
+  final String url;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text(url),
+      ),
+      body: WebView(
+        initialUrl: url,
+      )
     );
   }
 }
