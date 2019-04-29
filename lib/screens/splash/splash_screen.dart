@@ -79,7 +79,8 @@ class SplashScreenState extends State<SplashScreen> {
                     children: <Widget>[
                       SizedBox(
                         child: CircularProgressIndicator(
-                          strokeWidth: 3.0,
+                          strokeWidth: 4.0,
+                          backgroundColor: Colors.white,
                         ),
                       ),
                       Padding(padding: EdgeInsets.only(top: 30.0), child:Text('Toleo 3.0.3', 
