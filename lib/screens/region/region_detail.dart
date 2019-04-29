@@ -1,8 +1,10 @@
+import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:share/share.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:tovuti_halmashauri/constants/contents.dart';
 import 'package:tovuti_halmashauri/constants/popup.dart';
 
@@ -10,8 +12,9 @@ import 'package:tovuti_halmashauri/models/region_model.dart';
 import 'package:tovuti_halmashauri/models/district_model.dart';
 import 'package:tovuti_halmashauri/screens/about/about.dart';
 import 'package:tovuti_halmashauri/screens/dashboard/dashboard.dart';
-import 'package:tovuti_halmashauri/screens/region/web.dart';
 import 'package:tovuti_halmashauri/shared/endpoints.dart';
+import 'package:tovuti_halmashauri/widgets/indicator.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class DetailScreen extends StatefulWidget {
   final Region region;
@@ -87,7 +90,6 @@ class DetailScreenState extends State<DetailScreen> {
                     }).toList();
                   },
                 ),
-                
               ],
               flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
@@ -104,25 +106,7 @@ class DetailScreenState extends State<DetailScreen> {
             ),
           ];
         },
-        body: isLoading ? Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            CircularProgressIndicator(
-              strokeWidth: 2.0,
-            ),
-            SizedBox(height: 50.0,),
-            Text(
-              "Inachakata, subiri ...", 
-              style: TextStyle(
-                fontSize: 16.0,
-                color: Colors.black45,
-                fontWeight: FontWeight.w400
-              ),)
-          ],
-        ),
-      )
+        body: isLoading ? LoadingIndicator()
       :ListView.separated(
           separatorBuilder: (context, index) => Divider(
             color: Colors.black12,
@@ -145,16 +129,16 @@ class DetailScreenState extends State<DetailScreen> {
               trailing: Icon(Icons.public, color: Colors.green.shade300,),
               title: Text(
                 _districts[index].district, 
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18.0
-                ),
+                style: TextStyle(fontWeight: FontWeight.w600,fontSize: 18.0),
               ),
-              subtitle: Text(
-                _districts[index].web 
-              ),
-              onTap: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => new WebViewScreen(district: _districts[index])));
+              subtitle: Text(_districts[index].web),
+              onTap: () async {
+                if (Platform.isAndroid) {
+                  Navigator.push(context, MaterialPageRoute(
+                  builder: (context)=>WebViewPage(_districts[index].web)));
+                } else if (Platform.isIOS) {
+                  await launch(_districts[index].web);
+                }
               },
             );
           },
@@ -171,5 +155,22 @@ class DetailScreenState extends State<DetailScreen> {
         Navigator.push(context, MaterialPageRoute(builder: (_)=> DashboardScreen()));
         break;
     }
+  }
+}
+
+class WebViewPage extends StatelessWidget {
+  WebViewPage(this.url);
+  final String url;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text(url),
+      ),
+      body: WebView(
+        initialUrl: url,
+      )
+    );
   }
 }

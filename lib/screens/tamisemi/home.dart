@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
+import 'package:tovuti_halmashauri/constants/contents.dart';
+import 'package:tovuti_halmashauri/constants/popup.dart';
 import 'package:tovuti_halmashauri/screens/about/about.dart';
+import 'package:tovuti_halmashauri/screens/dashboard/dashboard.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:async';
 
@@ -24,25 +27,26 @@ class _ExplorerState extends State<WebExplorer> {
           IconButton(
             icon: Icon(Icons.share, color: Colors.white,),
             onPressed: (){
-              Share.share('Fikia Tovuti za Halmashauri mbalimbali Tanzania kiganjani mwako, pakua App ya Tovuti za Mikoa na Halmashauri za Tanzania sasa \n https://play.google.com/store/apps/details?id=com.boldtz.tovutizamikoa');
+              Share.share(Contents.Share);
             },
           ),
-          IconButton(
+          PopupMenuButton<String>(
+            onSelected: choiceAction,
             icon: Icon(Icons.more_vert),
-            onPressed: (){
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => new AboutScreen())
-              );
+            itemBuilder: (BuildContext context) {
+              return Constants.choices.map((String choice){
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(choice),
+                );
+              }).toList();
             },
-          )
+          ),
         ],
       ),
       body: WebView(
-        javaScriptMode: JavaScriptMode.unrestricted,
-        initialUrl: 'http://tamisemi.go.tz',
-        onWebViewCreated: (WebViewController webViewController) {
-          _controller.isCompleted ? _controller.complete(webViewController) : CircularProgressIndicator();
-        },
+        initialUrl: 'http://www.tamisemi.go.tz',
+        javascriptMode: JavascriptMode.unrestricted,
       ),
       floatingActionButton: _bookmarkButton(),
     );
@@ -68,5 +72,16 @@ class _ExplorerState extends State<WebExplorer> {
         return Container();
       },
     );
+  }
+
+  void choiceAction(String choice) {
+    switch(choice){
+      case Constants.About:
+        Navigator.push(context, MaterialPageRoute(builder: (_)=> AboutScreen()));
+        break;
+      case Constants.Home:
+        Navigator.push(context, MaterialPageRoute(builder: (_)=> DashboardScreen()));
+        break;
+    }
   }
 }

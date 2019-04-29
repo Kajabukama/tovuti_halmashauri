@@ -37,7 +37,6 @@ class WebViewScreenState extends State<WebViewScreen> {
         ],
       ),
       body: WebView(
-        javaScriptMode: JavaScriptMode.unrestricted,
         initialUrl: district.web,
         onWebViewCreated: (WebViewController webViewController) {
           _controller.complete(webViewController);

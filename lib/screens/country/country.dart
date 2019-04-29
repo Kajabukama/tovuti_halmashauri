@@ -9,6 +9,7 @@ import 'package:tovuti_halmashauri/screens/country/country_details.dart';
 import 'package:tovuti_halmashauri/screens/dashboard/dashboard.dart';
 import 'package:tovuti_halmashauri/shared/drawer.dart';
 import 'package:tovuti_halmashauri/shared/endpoints.dart';
+import 'package:tovuti_halmashauri/widgets/indicator.dart';
 
 class CountryScreen extends StatefulWidget {
   @override
@@ -79,66 +80,53 @@ class CountryState extends State<CountryScreen> {
             ),
           ];
         },
-        body: isLoading ? Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              CircularProgressIndicator(
-                strokeWidth: 2.0,
+        body: isLoading ? LoadingIndicator()
+        : RefreshIndicator(
+            color: Colors.red,
+            backgroundColor: Colors.white,
+            onRefresh: fetchArticles,
+            child: ListView.separated(
+              padding: EdgeInsets.only(bottom: 20.0, top: 10.0),
+              separatorBuilder: (context, index) => Divider(
+                color: Colors.black12,
               ),
-              SizedBox(height: 50.0,),
-              Text(
-                "Inachakata...", 
-                style: TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.black45,
-                  fontWeight: FontWeight.w500
-                ),)
-            ],
-          ),
-        )
-        : ListView.separated(
-        padding: EdgeInsets.only(bottom: 20.0, top: 10.0),
-        separatorBuilder: (context, index) => Divider(
-          color: Colors.black12,
-        ),
-        itemCount: _articles.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            leading: Container(
-              alignment: Alignment.topLeft,
-              width: 50.0,
-              height: 50.0,
-              // padding: const EdgeInsets.all(8.0),
-              decoration: new BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(_articles[index].imageAsset),
-                  fit: BoxFit.fill
-                ),
-                color: Colors.black.withOpacity(0.2),
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.all(Radius.circular(25.0))
-              )
+              itemCount: _articles.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  leading: Container(
+                    alignment: Alignment.topLeft,
+                    width: 50.0,
+                    height: 50.0,
+                    // padding: const EdgeInsets.all(8.0),
+                    decoration: new BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(_articles[index].imageAsset),
+                        fit: BoxFit.fill
+                      ),
+                      color: Colors.black.withOpacity(0.2),
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.all(Radius.circular(25.0))
+                    )
+                  ),
+                  trailing: Icon(Icons.chevron_right),
+                  title: Text(
+                    _articles[index].title, 
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16.0
+                    ),
+                  ),
+                  subtitle: Text("Imetolewa "+_articles[index].published),
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => DetailScreen(article: _articles[index],))
+                    );
+                  },
+                );
+              },
             ),
-            trailing: Icon(Icons.chevron_right),
-            title: Text(
-              _articles[index].title, 
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 16.0
-              ),
-            ),
-            subtitle: Text("Imetolewa "+_articles[index].published),
-            onTap: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => DetailScreen(article: _articles[index],))
-              );
-            },
-          );
-        },
-      )
+          )
       ),
     );
   }
