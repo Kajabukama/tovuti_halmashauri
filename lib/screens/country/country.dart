@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:tovuti_halmashauri/constants/popup.dart';
 import 'package:tovuti_halmashauri/models/article_model.dart';
-import 'package:tovuti_halmashauri/screens/about/about.dart';
 import 'package:tovuti_halmashauri/screens/country/country_details.dart';
-import 'package:tovuti_halmashauri/screens/dashboard/dashboard.dart';
 import 'package:tovuti_halmashauri/shared/drawer.dart';
 import 'package:tovuti_halmashauri/shared/endpoints.dart';
+import 'package:tovuti_halmashauri/shared/slide_page.dart';
 import 'package:tovuti_halmashauri/widgets/indicator.dart';
+import 'package:tovuti_halmashauri/widgets/popup.dart';
 
 class CountryScreen extends StatefulWidget {
   @override
@@ -53,30 +52,20 @@ class CountryState extends State<CountryScreen> {
           return <Widget>[
             SliverAppBar(
               actions: <Widget>[
-                PopupMenuButton<String>(
-                  onSelected: choiceAction,
-                  icon: Icon(Icons.more_vert),
-                  itemBuilder: (BuildContext context) {
-                    return Constants.choices.map((String choice){
-                      return PopupMenuItem<String>(
-                        value: choice,
-                        child: Text(choice),
-                      );
-                    }).toList();
-                  },
-                ),
+                SharedPopup()
               ],
               expandedHeight: 250.0,
               floating: false,
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
-                  centerTitle: true,
-                  title: Text("Habari Mbalimbali"),
-                  background: Image.asset("assets/president.jpg",
-                    fit: BoxFit.cover,
-                    color: Colors.black.withOpacity(0.4),
-                    colorBlendMode: BlendMode.luminosity,
-                  )),
+                centerTitle: true,
+                title: Text("Habari Mbalimbali"),
+                background: Image.asset("assets/jpm.jpg",
+                  fit: BoxFit.cover,
+                  color: Colors.black.withOpacity(0.4),
+                  colorBlendMode: BlendMode.luminosity,
+                )
+              ),
             ),
           ];
         },
@@ -120,7 +109,7 @@ class CountryState extends State<CountryScreen> {
                   onTap: (){
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => DetailScreen(article: _articles[index],))
+                      PageSlideTransition(builder: (_) => DetailScreen(article: _articles[index],))
                     );
                   },
                 );
@@ -129,15 +118,5 @@ class CountryState extends State<CountryScreen> {
           )
       ),
     );
-  }
-  void choiceAction(String choice) {
-    switch(choice){
-      case Constants.About:
-        Navigator.push(context, MaterialPageRoute(builder: (_)=> AboutScreen()));
-        break;
-      case Constants.Home:
-        Navigator.push(context, MaterialPageRoute(builder: (_)=> DashboardScreen()));
-        break;
-    }
   }
 }

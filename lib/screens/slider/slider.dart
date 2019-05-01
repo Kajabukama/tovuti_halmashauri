@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tovuti_halmashauri/screens/dashboard/dashboard.dart';
 import 'package:tovuti_halmashauri/screens/slider/slider_indicator.dart';
 import 'package:tovuti_halmashauri/models/slider_model.dart';
 
@@ -133,7 +134,7 @@ class PageSliderBodyState extends State<PageSliderBody> {
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(50.0)),
                 onPressed: () {
-                  Navigator.popAndPushNamed(context, '/dashboardScreen');
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => new DashboardScreen()));
                 },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(

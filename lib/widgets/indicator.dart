@@ -9,7 +9,7 @@ class LoadingIndicator extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           CircularProgressIndicator(
-            strokeWidth: 2.0,
+            strokeWidth: 4.0,
           ),
           SizedBox(height: 50.0,),
           Text(

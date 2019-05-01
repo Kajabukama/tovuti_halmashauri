@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:share/share.dart';
-import 'package:tovuti_halmashauri/constants/contents.dart';
-import 'package:tovuti_halmashauri/constants/popup.dart';
-
 import 'package:tovuti_halmashauri/models/article_model.dart';
-import 'package:tovuti_halmashauri/screens/about/about.dart';
-import 'package:tovuti_halmashauri/screens/home/home_screen.dart';
+import 'package:tovuti_halmashauri/widgets/popup.dart';
 
 class DetailScreen extends StatefulWidget {
   final Article article;
@@ -27,41 +22,15 @@ class DetailScreenState extends State<DetailScreen> {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              centerTitle: true,
               expandedHeight: 250.0,
               floating: false,
               pinned: true,
               actions: <Widget>[
-                IconButton(
-                  onPressed: () {
-                    Share.share(Contents.Share);
-                  },
-                  icon: Icon(Icons.share),
-                ),
-                PopupMenuButton<String>(
-                  onSelected: choiceAction,
-                  icon: Icon(Icons.more_vert),
-                  itemBuilder: (BuildContext context) {
-                    return Constants.choices.map((String choice){
-                      return PopupMenuItem<String>(
-                        value: choice,
-                        child: Text(choice),
-                      );
-                    }).toList();
-                  },
-                ),
-                
+                SharedPopup()
               ],
               flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
-                  title: Container(
-                    width: 250.0,
-                    child: Text(
-                      article.title,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                    ),
-                  ),
+                  title: Text("Habari"),
                   background: Image.network(article.imageAsset,
                     fit: BoxFit.cover,
                     color: Colors.black.withOpacity(0.4),
@@ -139,15 +108,5 @@ class DetailScreenState extends State<DetailScreen> {
         )
       ),
     );
-  }
-  void choiceAction(String choice) {
-    switch(choice){
-      case Constants.About:
-        Navigator.push(context, MaterialPageRoute(builder: (_)=> AboutScreen()));
-        break;
-      case Constants.Home:
-        Navigator.push(context, MaterialPageRoute(builder: (_)=> HomeScreen()));
-        break;
-    }
   }
 }

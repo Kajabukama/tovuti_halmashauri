@@ -9,7 +9,7 @@ class SharedDrawer extends StatelessWidget {
           fit: StackFit.expand,
           children: <Widget>[
             Container(
-              color: Color(0xFF222f3e),
+              color: Color(0xFF09B2EB),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -68,7 +68,7 @@ class SharedDrawer extends StatelessWidget {
                       },
                     ),
                   ),
-                  Divider(height: 10.0, color: Colors.black26,),
+                  Divider(height: 10.0, color: Colors.white54,),
                   Expanded(
                     flex: 1,
                     child: Container(

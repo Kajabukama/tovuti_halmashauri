@@ -4,6 +4,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:share/share.dart';
+import 'package:tovuti_halmashauri/shared/slide_page.dart';
+import 'package:tovuti_halmashauri/widgets/popup.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:tovuti_halmashauri/constants/contents.dart';
@@ -79,18 +81,7 @@ class DetailScreenState extends State<DetailScreen> {
                   },
                   icon: Icon(Icons.share),
                 ),
-                PopupMenuButton<String>(
-                  onSelected: choiceAction,
-                  icon: Icon(Icons.more_vert),
-                  itemBuilder: (BuildContext context) {
-                    return Constants.choices.map((String choice){
-                      return PopupMenuItem<String>(
-                        value: choice,
-                        child: Text(choice),
-                      );
-                    }).toList();
-                  },
-                ),
+                SharedPopup()
               ],
               flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
@@ -127,16 +118,25 @@ class DetailScreenState extends State<DetailScreen> {
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.all(Radius.circular(30.0))
                 )),
-              trailing: Icon(Icons.public, color: Colors.green.shade300,),
+              trailing: Icon(Icons.arrow_forward, color: Colors.green.shade300,),
               title: Text(
                 _districts[index].district, 
                 style: TextStyle(fontWeight: FontWeight.w600,fontSize: 18.0),
               ),
-              subtitle: Text(_districts[index].web),
+              subtitle: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Icon(Icons.public, size: 17.0, color: Colors.black12,),
+                  SizedBox(width: 5.0,),
+                  Text(_districts[index].web)
+
+                ],
+              ),
               onTap: () async {
                 if (Platform.isAndroid) {
-                  Navigator.push(context, MaterialPageRoute(
-                  builder: (context)=>WebViewPage(_districts[index].web)));
+                  Navigator.push(context, PageSlideTransition(
+                  builder: (context)=>WebViewPage(_districts[index].web,_districts[index].district)));
                 } else if (Platform.isIOS) {
                   await launch(_districts[index].web);
                 }
@@ -147,27 +147,18 @@ class DetailScreenState extends State<DetailScreen> {
       ),
     );
   }
-  void choiceAction(String choice) {
-    switch(choice){
-      case Constants.About:
-        Navigator.push(context, MaterialPageRoute(builder: (_)=> AboutScreen()));
-        break;
-      case Constants.Home:
-        Navigator.push(context, MaterialPageRoute(builder: (_)=> DashboardScreen()));
-        break;
-    }
-  }
 }
 
 class WebViewPage extends StatelessWidget {
-  WebViewPage(this.url);
+  WebViewPage(this.url, this.title);
   final String url;
+  final String title;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(url),
+        title: Text("Halmashauri ya " + title),
       ),
       body: WebView(
         initialUrl: url,

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tovuti_halmashauri/screens/region/region.dart';
 import 'package:tovuti_halmashauri/screens/dashboard/dashboard.dart';
+import 'package:tovuti_halmashauri/screens/home/home_screen.dart';
+import 'package:tovuti_halmashauri/screens/region/region.dart';
 import 'package:tovuti_halmashauri/screens/slider/slider.dart';
 import 'package:tovuti_halmashauri/screens/splash/splash_screen.dart';
-import 'package:tovuti_halmashauri/screens/home/home_screen.dart';
 
 void main() => runApp(new MaterialApp(
   debugShowCheckedModeBanner: false,
@@ -21,5 +21,7 @@ void main() => runApp(new MaterialApp(
     '/dashboardScreen': (BuildContext context) => new DashboardScreen(),
     '/sliderScreen': (BuildContext context) => new PageSlider(),
   },
+
 ));
+
 

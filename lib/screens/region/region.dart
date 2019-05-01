@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:tovuti_halmashauri/constants/popup.dart';
 
 import 'package:tovuti_halmashauri/models/region_model.dart';
-import 'package:tovuti_halmashauri/screens/about/about.dart';
-import 'package:tovuti_halmashauri/screens/dashboard/dashboard.dart';
 import 'package:tovuti_halmashauri/screens/region/region_detail.dart';
 import 'package:tovuti_halmashauri/shared/endpoints.dart';
 import 'package:tovuti_halmashauri/shared/search.dart';
+import 'package:tovuti_halmashauri/shared/slide_page.dart';
+import 'package:tovuti_halmashauri/widgets/indicator.dart';
+import 'package:tovuti_halmashauri/widgets/popup.dart';
 
 class RegionScreen extends StatefulWidget {
   @override
@@ -67,39 +67,11 @@ class RegionScreenState extends State<RegionScreen> {
               );
             },
           ),
-          PopupMenuButton<String>(
-            onSelected: choiceAction,
-            icon: Icon(Icons.more_vert),
-            itemBuilder: (BuildContext context) {
-              return Constants.choices.map((String choice){
-                return PopupMenuItem<String>(
-                  value: choice,
-                  child: Text(choice),
-                );
-              }).toList();
-            },
-          ),
+          SharedPopup()
         ],
       ),
-      body: isLoading ? Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            CircularProgressIndicator(
-              strokeWidth: 2.0,
-            ),
-            SizedBox(height: 50.0,),
-            Text(
-              "Inachakata, ...", 
-              style: TextStyle(
-                fontSize: 16.0,
-                color: Colors.black45,
-                fontWeight: FontWeight.w600
-              ),)
-          ],
-        ),
-      ) : ListView.separated(
+      body: isLoading ? LoadingIndicator() 
+      : ListView.separated(
         padding: EdgeInsets.only(bottom: 20.0, top: 10.0),
         separatorBuilder: (context, index) => Divider(
           color: Colors.black12,
@@ -134,22 +106,12 @@ class RegionScreenState extends State<RegionScreen> {
             onTap: (){
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => DetailScreen(region: _regions[index],))
+                PageSlideTransition(builder: (context) => DetailScreen(region: _regions[index],))
               );
             },
           );
         },
       )
     );
-  }
-  void choiceAction(String choice) {
-    switch(choice){
-      case Constants.About:
-        Navigator.push(context, MaterialPageRoute(builder: (_)=> AboutScreen()));
-        break;
-      case Constants.Home:
-        Navigator.push(context, MaterialPageRoute(builder: (_)=> DashboardScreen()));
-        break;
-    }
   }
 }
